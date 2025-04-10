@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SCP Mini Database</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #e0e0e0;
+      font-family: 'Courier New', Courier, monospace;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #1a1a1a;
+      padding: 30px;
+      border: 1px solid #444;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #ff4444;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    select {
+      background-color: #222;
+      color: #fff;
+      border: 1px solid #555;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    .scp-entry {
+      margin-top: 20px;
+    }
+
+    .scp-entry h2 {
+      color: #ff6666;
+      border-bottom: 2px solid #ff4444;
+      padding-bottom: 5px;
+    }
+
+    .label {
+      color: #888;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+
+    .object-class {
+      color: #ffcc00;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      color: #555;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>SCP Mini Database</h1>
+    <select id="scpSelector">
+      <option value="">-- Select an SCP --</option>
+      <option value="scp173">SCP-DM</option>
+      <option value="scp096">SCP-096</option>
+      <option value="scp049">SCP-049</option>
+    </select>
+
+    <div class="scp-entry" id="entryDisplay">
+      <!-- SCP content will load here -->
+    </div>
+
+    <footer>
+      Secure. Contain. Protect. | SCP Foundation (Unofficial Fan Site)
+    </footer>
+  </div>
+
+  <script>
+    const scpData = {
+      scp173: {
+        title: "SCP-DM",
+        objectClass: "Euclid",
+        procedures: "SCP-DM is to be kept in an 8m x 8m x 8m concrete containment cell, lined with Hafnium Carbide to withstand high-temperature exposure. The cell must remain at a temperature no higher than 15°C to reduce the likelihood of activation. All personnel entering the containment area must wear thermally insulated welding suits with full face protection and must receive prior approval from at least two Level 3 personnel. Under no circumstances should SCP-DM be antagonized, startled, or directly threatened. In the event of an aggression-triggered transformation (designated Event DM-A), the containment area is to be sealed immediately, and all personnel must evacuate to a minimum safe distance of 50 meters. Automated fire suppression systems are ineffective and should not be relied upon.",
+        description: "SCP-DM appears to be a humanoid male of Irish descent, approximately 1.75m tall, with naturally red hair and an unusually high core body temperature. SCP-DM displays exceptional agility, balance, and reflexes, consistent with advanced martial arts training. Under normal conditions, SCP-DM is cooperative and responds in a calm, sometimes playful demeanor. However, when provoked, physically harmed, or exposed to perceived threats (including sudden loud noises or aggressive body language), SCP-DM will enter a heightened combat state, herein referred to as Ignition Mode. During this transformation, SCP-DM becomes enveloped in an intense, sustained aura of flame, reaching external temperatures exceeding 2,200°C. While in Ignition Mode, SCP-DM demonstrates the following properties: immunity to bullets, explosives, and other conventional weaponry (projectiles either melt before impact or are deflected by heat distortion), inhuman strength and speed, with reaction times recorded at less than 0.03 seconds, and near-total disregard for pain or injury, continuing pursuit until the perceived aggressor is neutralized or deceased. SCP-DM will not return to its baseline state until the target of its aggression has been eliminated. Attempts to sedate or distract SCP-DM during this state have universally failed. Post-incident interviews indicate SCP-DM retains memory of events during Ignition Mode but claims limited control over its actions. It expresses remorse in most cases, though maintains a defensive stance if justified provocation is presented.",
+        recovery: "SCP-XXXX was recovered on 03/14/20██ from St. Patrick’s College in ███████, Ireland, following multiple emergency reports of \"a student on fire, immune to bullets.\" Local law enforcement had already engaged SCP-XXXX using non-lethal and standard firearms, inadvertently triggering an extended Ignition Mode event that resulted in the deaths of six officers and the destruction of the east wing of the main academic building. Foundation assets embedded in the Irish Gardaí intercepted emergency chatter and dispatched Mobile Task Force Psi-9 (\"Abyss Gazers\") to the location. MTF Psi-9 utilized a combination of cryogenic suppressants and distraction tactics to contain SCP-XXXX long enough for tranquilization. It required three (3) consecutive doses of Class-4 sedatives to subdue the subject. SCP-XXXX was initially believed to be an anomalous human, but post-containment scans indicated a core temperature regulation system that defies biological explanation, as well as thermal emission patterns consistent with small-scale combustion engines rather than organic heat dispersion. All witnesses were administered Class-B amnestics, and a cover story of a gas leak explosion was disseminated to local and national media. SCP-XXXX has since displayed no knowledge of how it arrived at St. Patrick’s College or the origin of its anomalous abilities. Ongoing interviews and psychological evaluations are being conducted."
+      },
+      scp096: {
+        title: "SCP-096",
+        objectClass: "Euclid",
+        procedures: "SCP-096 is to be contained in a sealed steel cube, constantly monitored. No photos or video recordings are allowed inside its chamber.",
+        description: "SCP-096 is a humanoid creature that will become extremely agitated when someone views its face, even indirectly. Once triggered, it will track and eliminate the viewer."
+      },
+      scp049: {
+        title: "SCP-049",
+        objectClass: "Euclid",
+        procedures: "SCP-049 is to be contained in a secure containment cell. Any requests made by SCP-049 must be approved by a Level 2 personnel or higher.",
+        description: "SCP-049 is a humanoid entity in the appearance of a plague doctor. It can cause death by touch and has shown surgical skill in post-mortem 'corrections'."
+      }
+    };
+
+    const selector = document.getElementById("scpSelector");
+    const display = document.getElementById("entryDisplay");
+
+    selector.addEventListener("change", () => {
+      const scp = scpData[selector.value];
+      if (scp) {
+        display.innerHTML = `
+          <h2>${scp.title}</h2>
+          <p><span class="label">Object Class:</span> <span class="object-class">${scp.objectClass}</span></p>
+          <p><span class="label">Special Containment Procedures:</span> ${scp.procedures}</p>
+          <p><span class="label">Description:</span> ${scp.description}</p>
+          ${scp.recovery ? `<p><span class="label">Recovery Log:</span> ${scp.recovery}</p>` : ""}
+        `;
+      } else {
+        display.innerHTML = "";
+      }
+    });
+  </script>
+</body>
+</html>
